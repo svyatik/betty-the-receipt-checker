@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import { observer } from 'mobx-react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FaEye, FaEyeSlash, FaFileAlt } from "react-icons/fa";
+import { StoreContext } from './contexts';
 
 // Components
 import DataTable from './components/DataTable';
@@ -9,20 +11,22 @@ import DataTable from './components/DataTable';
 import '../scss/main.scss';
 import './styles.scss';
 
-// const version = require('project-version');
-
 type State = {
-  data: Receipt[];
   isHideUnchecked: boolean;
 }
 
+const data = [
+  { id: 1, isChecked: false, title: 'Вода мінеральна Карпатська Джерельна сл/газ, 2л', quantity: 7, sum: 13.19 },
+  { id: 2, isChecked: true, title: 'Йогурт Живинка молочний чорниця, 4*115г', quantity: 1, sum: 23.29 },
+  { id: 3, isChecked: false, title: 'Томат рожевий, кг', quantity: 0.456, sum: 99.90 },
+];
+
+@observer
 class App extends Component {
+  static contextType = StoreContext;
+  declare context: React.ContextType<typeof StoreContext>
+
   state: State = {
-    data: [
-      { id: 1, isChecked: false, title: 'Вода мінеральна Карпатська Джерельна сл/газ, 2л', quantity: 7, sum: 13.19 },
-      { id: 2, isChecked: true, title: 'Йогурт Живинка молочний чорниця, 4*115г', quantity: 1, sum: 23.29 },
-      { id: 3, isChecked: false, title: 'Томат рожевий, кг', quantity: 0.456, sum: 99.90 },
-    ],
     isHideUnchecked: false
   };
 
@@ -30,8 +34,14 @@ class App extends Component {
     this.setState({ isHideUnchecked: !this.state.isHideUnchecked });
   }
 
+  addReceiptClickHandle = () => {
+    const { receipt } = this.context;
+    data.forEach(record => receipt.addRecord(record));
+  }
+
   render() {
-    const { data, isHideUnchecked } = this.state;
+    const { isHideUnchecked } = this.state;
+    const { receipt } = this.context;
 
     return (
       <Fragment>
@@ -51,7 +61,7 @@ class App extends Component {
                   </Fragment>
                 }
               </Button>
-              <Button variant="dark">
+              <Button variant="dark" onClick={this.addReceiptClickHandle}>
                 <FaFileAlt className="align-middle mr-2" />
                 <span className="align-middle">Add receipt</span>
               </Button>
@@ -59,12 +69,12 @@ class App extends Component {
           </Row>
           <Row className="mt-4">
             <Col>
-              <DataTable data={data} isHideUnchecked={isHideUnchecked} />
+              <DataTable isHideUnchecked={isHideUnchecked} />
             </Col>
           </Row>
           <Row className="mt-4">
             <Col className="text-right">
-              <p>Total: <b>124.45 грн</b></p>
+              <p>Total: <b>{receipt.totalSum} грн</b></p>
             </Col>
           </Row>
         </Container>
