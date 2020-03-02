@@ -1,0 +1,38 @@
+.data-table {
+  tbody > tr > td {
+    vertical-align: middle;
+  }
+
+  &__input {
+    height: 34px !important;
+    display: inline-block !important;
+
+    &--qty {
+      width: 64px !important;
+    }
+
+    &--price {
+      width: 68px !important;
+    }
+  }
+
+  &__sub {
+    display: inline-block;
+  }
+
+  &.table-hover tbody tr:hover {
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+}
+
+@media print{
+  .data-table {
+    &__input {
+      height: initial !important;
+      width: initial !important;
+      border: none !important;
+    }
+  }
+}
+
