@@ -9,11 +9,7 @@ import DataTableRow from '../DataTableRow';
 // Styles
 import './styles.scss';
 
-type Props = {
-  isHideUnchecked: boolean;
-}
-
-const DataTable: FC<Props> = observer(({ isHideUnchecked }) => {
+const DataTable: FC = observer(() => {
   const { receipt } = useContext(StoreContext);
 
   return (
@@ -22,18 +18,18 @@ const DataTable: FC<Props> = observer(({ isHideUnchecked }) => {
         <tr>
           <th className="media-desktop">
             <FormCheck custom={true}>
-              <FormCheck.Input type={'checkbox'} />
-              <FormCheck.Label />
+              <FormCheck.Input id='select-all' type={'checkbox'} onChange={receipt.toggleAll} />
+              <FormCheck.Label htmlFor='select-all'  />
             </FormCheck>
           </th>
-          <th>#</th>
           <th>Title</th>
           <th>Qty & Price</th>
           <th>Sum</th>
         </tr>
       </thead>
       <tbody>
-        {receipt.records.map((receipt, index) => <DataTableRow key={receipt.id} counter={index + 1} receipt={receipt} hide={isHideUnchecked} />)}
+        {receipt.records
+          .map((record, index) => <DataTableRow key={record.id} record={record} onEdit={receipt.editRecord} />)}
       </tbody>
     </Table>
   );

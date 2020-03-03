@@ -7,12 +7,13 @@
     height: 34px !important;
     display: inline-block !important;
 
-    &--qty {
-      width: 64px !important;
+    &--qty,
+    &--price {
+      width: 82px !important;
     }
 
-    &--price {
-      width: 68px !important;
+    &--error {
+      border-color: #dc3545 !important;
     }
   }
 
@@ -28,6 +29,12 @@
 
 @media print{
   .data-table {
+    &__row {
+      &--hidden {
+        display: none;
+      }
+    }
+
     &__input {
       height: initial !important;
       width: initial !important;

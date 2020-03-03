@@ -20,6 +20,6 @@ export default class RecordModel {
   }
 
   @computed public get total(): number {
-    return this.quantity * this.sum;
+    return (this.quantity || 1) * (this.sum || 0);
   }
 }
