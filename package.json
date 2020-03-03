@@ -1,7 +1,7 @@
 {
-  "name": "silpo-management",
+  "name": "betty-the-receipt-checker",
   "version": "0.1",
-  "description": "The small app to manage receipts from Silpo store",
+  "description": "Just for fun to parse receipts from the local store Silpo, select / deselect records and print the data. Contains lots of bugs :)",
   "main": "index.js",
   "author": "Svyat K <svyat.kovtun@gmail.com>",
   "license": "MIT",
