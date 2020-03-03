@@ -8,6 +8,8 @@ export class ReceiptStore {
 
   @observable public records: Array<RecordModel>;
   @observable public checkAll: boolean = false;
+  @observable public showModal: boolean = false;
+  @observable public date: string = '';
 
   @action addRecord = (item: Partial<RecordModel>): void => {
     this.records.push(new RecordModel(item.id, item.title, item.quantity, item.sum));
@@ -29,6 +31,15 @@ export class ReceiptStore {
     return this.records
       .filter(record => record.isChecked)
       .reduce((acc, record) => acc += record.total, 0);
+  }
+
+  // Todo. Consider moving to another store
+  @action toggleModal = (): void => {
+    this.showModal = !this.showModal;
+  }
+
+  @action addDate = (date: string): void => {
+    this.date = date;
   }
 }
 
