@@ -1,3 +1,28 @@
 {
-  "presets": ["env", "react"]
+  "presets": [
+    "env",
+    "react"
+  ],
+  "plugins": [
+    [
+      "transform-imports",
+      {
+        "react-bootstrap": {
+          "transform": "react-bootstrap/lib/${member}",
+          // "preventFullImport": true,
+          "skipDefaultConversion": true
+        },
+        "@fortawesome/free-solid-svg-icons": {
+          "transform": "@fortawesome/free-solid-svg-icons/${member}",
+          // "preventFullImport": true,
+          "skipDefaultConversion": true
+        }
+        /* "@fortawesome/react-fontawesome": {
+          "transform": "@fortawesome/react-fontawesome/${member}",
+          // "preventFullImport": true,
+          "skipDefaultConversion": true
+        } */
+      }
+    ]
+  ]
 }

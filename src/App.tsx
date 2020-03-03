@@ -1,7 +1,11 @@
 import React, { Component, ContextType, Fragment } from 'react';
 import { observer } from 'mobx-react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { FaPrint, FaFileAlt } from "react-icons/fa";
+
+// Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPrint, faFileAlt } from '@fortawesome/free-solid-svg-icons';
+
 import { StoreContext } from './contexts';
 
 // Components
@@ -9,15 +13,8 @@ import DataTable from './components/DataTable';
 import ReceiptModal from './components/ReceiptModal';
 
 // Styles
-import '../scss/main.scss';
 import './styles.scss';
 
-/* const data = [
-  { id: 1, isChecked: false, title: 'Вода мінеральна Карпатська Джерельна сл/газ, 2л', quantity: 7, sum: 13.19 },
-  { id: 2, isChecked: true, title: 'Йогурт Живинка молочний чорниця, 4*115г', quantity: 1, sum: 23.29 },
-  { id: 3, isChecked: false, title: 'Томат рожевий, кг', quantity: 0.456, sum: 99.90 },
-];
- */
 @observer
 class App extends Component {
   static contextType = StoreContext;
@@ -30,8 +27,6 @@ class App extends Component {
   addReceiptClickHandle = () => {
     const { receipt } = this.context;
     receipt.toggleModal();
-    /* const { receipt } = this.context;
-    data.forEach(record => receipt.addRecord(record)); */
   }
 
   render() {
@@ -51,11 +46,11 @@ class App extends Component {
             </Col>
             <Col className="text-right media-desktop">
               <Button className="mr-3" variant="light" onClick={this.onPrintSelectedHandle} disabled={!canPrint}>
-                <FaPrint className="align-middle mr-2" />
+                <FontAwesomeIcon className="align-middle mr-2" icon={faPrint} />
                 <span className="align-middle">Print selected</span>
               </Button>
               <Button variant="dark" onClick={this.addReceiptClickHandle}>
-                <FaFileAlt className="align-middle mr-2" />
+                <FontAwesomeIcon className="align-middle mr-2" icon={faFileAlt} />
                 <span className="align-middle">Add receipt</span>
               </Button>
             </Col>

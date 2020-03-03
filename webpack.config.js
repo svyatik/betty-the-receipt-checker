@@ -5,23 +5,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
 
+const isProd = process.env.NODE_ENV === 'production';
 
-module.exports = {
-  entry: { main: './index.tsx' },
+const config = {
+  mode: isProd ? 'production' : 'development',
+  entry: { main: './src/index.tsx' },
   output: {
-    path: path.resolve(__dirname, 'dist/'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js'
   },
-  devtool: 'inline-source-map',
+  devtool: isProd ? '' : 'inline-source-map',
   devServer: {
     contentBase: [
       path.join(__dirname, 'src'),
-      path.join(__dirname, 'scss'),
       path.join(__dirname, 'public'),
-      path.join(__dirname, '@types'),
     ],
     open: true,
     watchContentBase: true
@@ -30,16 +28,12 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'ts-loader',
         exclude: /node_modules/,
+        options: {
+          configFile: isProd ? 'tsconfig.json' : 'tsconfig.dev.json'
+        },
       },
-      /* {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
-      }, */
       {
         test: /\.(png|jpe?g|gif)$/i,
         loader: 'file-loader',
@@ -58,13 +52,13 @@ module.exports = {
         test: /\.(css|scss|sass)$/i,
         use: [
           'style-loader',
-          // MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'resolve-url-loader',
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
+              sourceMap: !isProd
             }
           }
         ]
@@ -72,10 +66,12 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.js', '.tsx', '.ts'],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      protectWebpackAssets: false
+    }),
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css',
     }),
@@ -86,13 +82,10 @@ module.exports = {
       filename: 'index.html',
     }),
     new WebpackMd5Hash(),
-    new StyleLintPlugin({
-      configFile: './stylelint.config.js',
-      files: './scss/*.scss',
-      syntax: 'scss'
-    }),
     new webpack.DefinePlugin({
       "process.env.APP_VERSION": JSON.stringify(require('./package.json').version)
     })
   ]
 };
+
+module.exports = config;

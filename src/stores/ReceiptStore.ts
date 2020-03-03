@@ -12,7 +12,7 @@ export class ReceiptStore {
   @observable public date: string = '';
 
   @action addRecord = (item: Partial<RecordModel>): void => {
-    this.records.push(new RecordModel(item.id, item.title, item.quantity, item.sum));
+    // this.records.push(new RecordModel(item.id, item.title, item.quantity, item.sum));
   };
 
   @action editRecord = (id: number, item: Partial<RecordModel>): void => {

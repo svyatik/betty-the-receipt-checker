@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './src/App';
-import { createStores } from './src/stores';
-import { StoreContext } from './src/contexts';
+import App from './App';
+import { createStores } from './stores';
+import { StoreContext } from './contexts';
 
-import 'bootstrap';
+import './main.scss';
 
 ReactDOM.render(
   <StoreContext.Provider value={createStores()}>

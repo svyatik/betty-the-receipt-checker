@@ -6,15 +6,16 @@
   "author": "Svyat K <svyat.kovtun@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=dev webpack-dev-server --mode=development --hot --color"
+    "start": "cross-env NODE_ENV=dev webpack-dev-server --hot --color --overlay",
+    "build": "cross-env NODE_ENV=production PLATFORM=web webpack -p"
   },
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/react-fontawesome": "^0.1.8",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
-    "popper.js": "^1.16.1",
     "react-bootstrap": "^1.0.0-beta.17",
-    "react-icons": "^3.9.0",
     "react-number-format": "^4.4.1"
   },
   "devDependencies": {
@@ -24,9 +25,9 @@
     "autoprefixer": "^9.7.4",
     "babel-core": "^6.26.3",
     "babel-loader": "7",
+    "babel-plugin-transform-imports": "^2.0.0",
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^7.0.0",
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
@@ -45,9 +46,7 @@
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.1.3",
-    "stylelint": "^13.1.0",
-    "stylelint-config-recommended": "^3.0.0",
-    "stylelint-webpack-plugin": "^1.2.3",
+    "terser-webpack-plugin": "^2.3.5",
     "ts-loader": "^6.2.1",
     "typescript": "^3.8.3",
     "webpack": "^4.41.6",
