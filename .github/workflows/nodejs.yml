@@ -19,15 +19,19 @@ jobs:
         node-version: [10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Node App Helper Actions
-      uses: guahanweb/action-nodejs-gh-pages@1.0.0  
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+        
+    - name: Generate content
+      run: yarn install && yarn build --if-present
+    
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
       env:
         CI: true
