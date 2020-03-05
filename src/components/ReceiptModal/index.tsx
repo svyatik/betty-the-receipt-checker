@@ -29,6 +29,8 @@ class ReceiptModal extends Component {
     const text = this.state.text.split('\n');
     const recordsRaw = text.slice(6, text.length);
 
+    receipt.deleteAllRecords();
+
     for (let i = 0; i < recordsRaw.length; i += 3) {
       const totalRaw = recordsRaw[i+1].split(' × ');
 
