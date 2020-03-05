@@ -1,7 +1,10 @@
 import React, { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
-import { Table, FormCheck } from 'react-bootstrap';
 import { StoreContext } from '../../contexts';
+
+// Bootstrap components
+import Table from 'react-bootstrap/Table';
+import FormCheck from 'react-bootstrap/FormCheck';
 
 // Components
 import DataTableRow from '../DataTableRow';

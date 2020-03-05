@@ -1,12 +1,17 @@
 import React, { Component, ContextType, Fragment } from 'react';
 import { observer } from 'mobx-react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { StoreContext } from './contexts';
+
+// Bootstrap components
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPrint, faFileAlt } from '@fortawesome/free-solid-svg-icons';
-
-import { StoreContext } from './contexts';
+import { faPrint } from '@fortawesome/free-solid-svg-icons/faPrint';
+import { faFileAlt } from '@fortawesome/free-solid-svg-icons/faFileAlt';
 
 // Components
 import DataTable from './components/DataTable';
@@ -31,7 +36,6 @@ class App extends Component {
 
   render() {
     const { receipt } = this.context;
-
     const canPrint = receipt.records.filter(record => record.isChecked).length > 0;
 
     return (
@@ -77,8 +81,8 @@ class App extends Component {
 
         <ReceiptModal />
       </Fragment>
-      );
-    }
+    );
   }
-  
-  export default App;
+}
+
+export default App;

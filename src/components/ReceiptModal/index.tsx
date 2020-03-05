@@ -1,7 +1,11 @@
 import React, { Component, ContextType, FormEvent } from 'react';
 import { observer } from 'mobx-react';
-import { Modal, Button, Form } from 'react-bootstrap';
 import { StoreContext } from '../../contexts';
+
+// Bootstrap components
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 type State = {
   text: string;

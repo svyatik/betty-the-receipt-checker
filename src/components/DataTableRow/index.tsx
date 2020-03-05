@@ -1,7 +1,11 @@
 import React, { FC, FormEvent } from 'react';
-import { FormCheck } from 'react-bootstrap';
-import { RecordModel } from '../../models';
 import NumberFormat from 'react-number-format';
+
+// Bootstrap components
+import FormCheck from 'react-bootstrap/FormCheck';
+
+// Models
+import { RecordModel } from '../../models';
 
 type Props = {
   record: RecordModel;
