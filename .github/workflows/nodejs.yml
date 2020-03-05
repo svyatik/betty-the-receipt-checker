@@ -24,8 +24,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn install
-    - run: yarn build --if-present
+        
+    - name: Generate content
+      run: yarn install && yarn build --if-present
+
     - name: Publish generated content to GitHub Pages
       uses: tsunematsu21/actions-publish-gh-pages@v1.0.0
       with:
