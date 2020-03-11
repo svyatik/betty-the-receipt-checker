@@ -24,10 +24,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-        
+
     - name: Generate content
       run: yarn install && yarn build --if-present
-    
+
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:

@@ -23,7 +23,11 @@ body {
   display: none;
 }
 
-@media print{
+@media print {
+  html {
+    font-size: 80%
+  }
+
   body {
     font: 9.5pt Georgia, "Times New Roman", Times, serif;
     line-height: 1.3;
