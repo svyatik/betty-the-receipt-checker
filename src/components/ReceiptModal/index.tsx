@@ -43,7 +43,10 @@ class ReceiptModal extends Component {
       receipt.addRecord({ id, title, quantity, sum });
     }
 
-    receipt.addDate(`${text[0].substring(0,10)} ${text[0].substring(10,15)}`);
+    const date = text[2];
+
+    receipt.addDate(`${date.substring(0, date.length -5)} ${date.substring(date.length -5, date.length)}`);
+    // receipt.addDate(`${text[0].substring(0,10)} ${text[0].substring(10,15)}`);
     receipt.toggleModal();
   }
 
